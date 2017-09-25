@@ -9,8 +9,8 @@ def create_instrument(session: Session, name: str):
     return {'name': instrument._id}
 
 
-def edit_instrument(record_id: int):
-    return {}
+def edit_instrument(record_id: int, name: str):
+    return Instrument.api_edit()
 
 
 def list_instrument(session: Session):

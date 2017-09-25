@@ -5,6 +5,7 @@ from sqlalchemy import event
 
 from .meta import Base
 
+
 class Manufacturer(SurrogatePK, Model):
     __tablename__ = 'manufacturer'
     name = Column(db.String(255))

@@ -20,7 +20,7 @@ class CRUDMixin(object):
         instance = cls(**kwargs)
         return instance
 
-    def update(self, commit=True, **kwargs):
+    def update(self, session:Session, commit=True, **kwargs):
         """Update specific fields of a record."""
         for attr, value in kwargs.items():
             setattr(self, attr, value)
@@ -88,9 +88,9 @@ class SurrogatePK(object):
     def api_edit(cls, session:Session, record_id: int, *args, **kwargs):
         res = cls.get_by_id(record_id)
         if res:
-            success = cls.update(*args, **kwargs)
+            return cls.update(session, *args, **kwargs)
 
-        return Response(status=501)
+        return Response(status=404)
 
 
 def reference_col(tablename, nullable=False, pk_name='_id', **kwargs):
